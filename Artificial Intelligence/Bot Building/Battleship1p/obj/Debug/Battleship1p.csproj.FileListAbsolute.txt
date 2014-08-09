@@ -1,0 +1,9 @@
+C:\Dev\Bitbucket\hackerrank\Battleship1p\bin\Debug\Battleship1p.exe.config
+C:\Dev\Bitbucket\hackerrank\Battleship1p\bin\Debug\Battleship1p.exe
+C:\Dev\Bitbucket\hackerrank\Battleship1p\bin\Debug\Battleship1p.pdb
+C:\Dev\Bitbucket\hackerrank\Battleship1p\obj\Debug\Battleship1p.csprojResolveAssemblyReference.cache
+C:\Dev\Bitbucket\hackerrank\Battleship1p\obj\Debug\Battleship1p.exe
+C:\Dev\Bitbucket\hackerrank\Battleship1p\obj\Debug\Battleship1p.pdb
+C:\Dev\GitHub\HackerRank\Battleship1p\bin\Debug\Battleship1p.exe.config
+C:\Dev\GitHub\HackerRank\Battleship1p\obj\Debug\Battleship1p.exe
+C:\Dev\GitHub\HackerRank\Battleship1p\obj\Debug\Battleship1p.pdb

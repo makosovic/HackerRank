@@ -53,12 +53,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExecuteMoveTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\2048\2048.csproj">
-      <Project>{881e725c-36ed-4c3b-b4c7-b6c12d1381b3}</Project>
-      <Name>2048</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

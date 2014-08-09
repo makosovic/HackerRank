@@ -1,0 +1,5 @@
+C:\Dev\Bitbucket\hackerrank\Battleship\bin\Debug\Battleship.exe.config
+C:\Dev\Bitbucket\hackerrank\Battleship\bin\Debug\Battleship.exe
+C:\Dev\Bitbucket\hackerrank\Battleship\bin\Debug\Battleship.pdb
+C:\Dev\Bitbucket\hackerrank\Battleship\obj\Debug\Battleship.exe
+C:\Dev\Bitbucket\hackerrank\Battleship\obj\Debug\Battleship.pdb
