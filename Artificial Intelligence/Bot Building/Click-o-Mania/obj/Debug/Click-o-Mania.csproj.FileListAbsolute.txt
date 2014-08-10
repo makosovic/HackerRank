@@ -3,3 +3,8 @@ C:\Dev\Bitbucket\hackerrank\Click-o-Mania\bin\Debug\Click-o-Mania.exe
 C:\Dev\Bitbucket\hackerrank\Click-o-Mania\bin\Debug\Click-o-Mania.pdb
 C:\Dev\Bitbucket\hackerrank\Click-o-Mania\obj\Debug\Click-o-Mania.exe
 C:\Dev\Bitbucket\hackerrank\Click-o-Mania\obj\Debug\Click-o-Mania.pdb
+C:\Dev\GitHub\HackerRank\Artificial Intelligence\Bot Building\Click-o-Mania\bin\Debug\Click-o-Mania.exe.config
+C:\Dev\GitHub\HackerRank\Artificial Intelligence\Bot Building\Click-o-Mania\bin\Debug\Click-o-Mania.exe
+C:\Dev\GitHub\HackerRank\Artificial Intelligence\Bot Building\Click-o-Mania\bin\Debug\Click-o-Mania.pdb
+C:\Dev\GitHub\HackerRank\Artificial Intelligence\Bot Building\Click-o-Mania\obj\Debug\Click-o-Mania.exe
+C:\Dev\GitHub\HackerRank\Artificial Intelligence\Bot Building\Click-o-Mania\obj\Debug\Click-o-Mania.pdb

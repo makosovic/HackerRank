@@ -323,59 +323,11 @@ namespace CharlieHousingPrices
     {
         private static void Main(String[] args)
         {
-            //Vector priceVector;
-            //Matrix designMatrix;
-            //Matrix variablesMatrix;
-
-            //string firstLine = Console.ReadLine();
-            //string[] parameters = firstLine.Split(' ');
-            //int variablesCount = Convert.ToInt32(parameters[0]);
-            //int observationsCount = Convert.ToInt32(parameters[1]);
-
-            //priceVector = new Vector(observationsCount);
-            //designMatrix = new Matrix(observationsCount, variablesCount + 1);
-
-            //for (int i = 0; i < observationsCount; i++)
-            //{
-            //    string line = Console.ReadLine();
-            //    string[] lineData = line.Split(' ');
-            //    double[] designMatrixRow = new double[variablesCount + 1];
-
-            //    for (int j = 0; j < variablesCount + 1; j++)
-            //    {
-            //        if (j == 0) designMatrixRow[j] = 1;
-            //        if (j < variablesCount)
-            //            designMatrixRow[j + 1] = Double.Parse(lineData[j], CultureInfo.InvariantCulture);
-            //        else
-            //            priceVector[i] = Double.Parse(lineData[j], CultureInfo.InvariantCulture);
-            //    }
-
-            //    designMatrix[i] = designMatrixRow;
-            //}
-
-            //int resultCount = Convert.ToInt32(Console.ReadLine());
-            //variablesMatrix = new Matrix(resultCount, variablesCount);
-
-            //for (int i = 0; i < resultCount; i++)
-            //{
-            //    string line = Console.ReadLine();
-            //    string[] lineData = line.Split(' ');
-            //    double[] variablesMatrixRow = new double[variablesCount];
-
-            //    for (int j = 0; j < variablesCount; j++)
-            //    {
-            //        variablesMatrixRow[j] = Double.Parse(lineData[j], CultureInfo.InvariantCulture);
-            //    }
-
-            //    variablesMatrix[i] = variablesMatrixRow;
-            //}
-            System.IO.StreamReader myFile = new System.IO.StreamReader("C:\\Users\\Marko\\Downloads\\charlie.txt");
-
             Vector priceVector;
             Matrix designMatrix;
             Matrix variablesMatrix;
 
-            string firstLine = myFile.ReadLine();
+            string firstLine = Console.ReadLine();
             string[] parameters = firstLine.Split(' ');
             int variablesCount = Convert.ToInt32(parameters[0]);
             int observationsCount = Convert.ToInt32(parameters[1]);
@@ -385,7 +337,7 @@ namespace CharlieHousingPrices
 
             for (int i = 0; i < observationsCount; i++)
             {
-                string line = myFile.ReadLine();
+                string line = Console.ReadLine();
                 string[] lineData = line.Split(' ');
                 double[] designMatrixRow = new double[variablesCount + 1];
 
@@ -401,12 +353,12 @@ namespace CharlieHousingPrices
                 designMatrix[i] = designMatrixRow;
             }
 
-            int resultCount = Convert.ToInt32(myFile.ReadLine());
+            int resultCount = Convert.ToInt32(Console.ReadLine());
             variablesMatrix = new Matrix(resultCount, variablesCount);
 
             for (int i = 0; i < resultCount; i++)
             {
-                string line = myFile.ReadLine();
+                string line = Console.ReadLine();
                 string[] lineData = line.Split(' ');
                 double[] variablesMatrixRow = new double[variablesCount];
 
@@ -417,13 +369,6 @@ namespace CharlieHousingPrices
 
                 variablesMatrix[i] = variablesMatrixRow;
             }
-
-            myFile.Close();
-
-
-
-
-
 
             // Calculate regression coeficients
             Vector regressionCoeficientsVector = CalculateRegression(designMatrix, priceVector);

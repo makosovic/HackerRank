@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algebra\Algebra.cs" />
     <Compile Include="Algebra\MatrixAlgebra.cs" />
-    <Compile Include="Models\Coordinate2D.cs" />
+    <Compile Include="Combinatorics\Combinatorics.cs" />
     <Compile Include="Models\Matrix.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Position.cs" />

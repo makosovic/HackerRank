@@ -10,7 +10,7 @@ namespace _2048.Test
         {
             int[,] board = new int[,] { { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 } };
             int[,] expected = new int[,] { { 4, 4, 4, 4 }, { 4, 4, 4, 4 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
-
+            
             int[,] actual = Solution.ExecuteMoveUP(board);
 
             for (int i = 0; i < 4; i++)

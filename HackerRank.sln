@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Click-o-Mania", "Artificial
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeEscape", "Artificial Intelligence\Bot Building\MazeEscape\MazeEscape.csproj", "{72B7B958-B205-4871-B942-A114D69F0F0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharlieOfficeSpacePrices", "Artificial Intelligence\Statistics and Machine Learning\CharlieOfficeSpacePrices\CharlieOfficeSpacePrices.csproj", "{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,10 @@ Global
 		{72B7B958-B205-4871-B942-A114D69F0F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72B7B958-B205-4871-B942-A114D69F0F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72B7B958-B205-4871-B942-A114D69F0F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,5 +159,6 @@ Global
 		{A89A9ABC-8D4C-4909-A6BB-0080BCB64F40} = {2A47625C-61FC-4581-A42A-E943E531909F}
 		{FF7FD8C8-02E1-4A65-BB44-2B3CCFED0848} = {2A47625C-61FC-4581-A42A-E943E531909F}
 		{72B7B958-B205-4871-B942-A114D69F0F0A} = {2A47625C-61FC-4581-A42A-E943E531909F}
+		{2B851E76-D6C8-488B-B9D5-7AB0C82AC9D4} = {6FDDE66F-FAF5-449C-B3E0-E0865EE7ECC7}
 	EndGlobalSection
 EndGlobal

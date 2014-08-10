@@ -2,9 +2,9 @@
 using System;
 using HackerRank.Utility.Models;
 
-namespace HackerRank.Utility.Algebra
+namespace HackerRank.Utility
 {
-    static class MatrixAlgebra
+    public static class MatrixAlgebra
     {
         /// <summary>
         /// Returns product of matrixA and matrixB
