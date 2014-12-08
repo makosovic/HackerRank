@@ -5,5 +5,5 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
-1. Equations matrix is not populated properly
+1. Only does order 2 polynom (Find the optimum polynomial order to use for regression)
 2. Refactor PolynomialRegression

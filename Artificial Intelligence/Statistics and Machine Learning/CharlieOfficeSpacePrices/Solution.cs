@@ -332,7 +332,7 @@ namespace CharlieOfficeSpacePrices
         {
             if (n <= 1)
                 return 1;
-            return n*Factorial(n - 1);
+            return n * Factorial(n - 1);
         }
     }
 
@@ -362,7 +362,7 @@ namespace CharlieOfficeSpacePrices
     {
         #region fields
 
-        private static readonly int[] TermsCount = { 0, 3, 6, 11, 20, 32 };
+        private static readonly int[] TermsCount = { 0, 3, 6, 11, 20, 37 };
 
         private static Matrix _dataVariables;
         private static Vector _dataResponse;
@@ -387,7 +387,7 @@ namespace CharlieOfficeSpacePrices
 
                 for (int j = 1; j < variablesCount + 1; j++)
                 {
-                    queryResult[i] += coeficients[j]*queryVariables[i][j - 1];
+                    queryResult[i] += coeficients[j] * queryVariables[i][j - 1];
                     queryResult[i] += coeficients[j + variablesCount] * queryVariables[i][j - 1];
                 }
 
@@ -428,88 +428,95 @@ namespace CharlieOfficeSpacePrices
             }
             _rhsVector[0] = y;
 
-            double allVariablesInteraction = 0;
-
-            // calculate first term
-            for (int i = 0; i < variablesCount; i++)
+            // calculate equations matrix
+            for (int n = 0; n < dataRows; n++)
             {
-                double firstTermVariableSum = 0;
+                Matrix tempMatrix = new Matrix(TermsCount[variablesCount], TermsCount[variablesCount]);
 
-                for (int j = 0; j < dataRows; j++)
+                for (int i = 0; i < variablesCount; i++)
                 {
-                    firstTermVariableSum += _dataVariables[j][i];
+
+                    // first term
+                    tempMatrix[0][i + 1] = _dataVariables[n][i];
+                    tempMatrix[i + 1][0] = tempMatrix[0][i + 1];
+                    _rhsVector[i + 1] += tempMatrix[0][i + 1] * _dataResponse[n];
+
+                    // second term
+                    tempMatrix[0][i + 1 + variablesCount] = Math.Pow(_dataVariables[n][i], 2);
+                    tempMatrix[i + 1 + variablesCount][0] = tempMatrix[0][i + 1 + variablesCount];
+                    _rhsVector[i + 1 + variablesCount] += tempMatrix[0][i + 1 + variablesCount] * _dataResponse[n];
                 }
 
-                _equationsMatrix[0][i + 1] = firstTermVariableSum;
-                _equationsMatrix[i + 1][0] = firstTermVariableSum;
-                _rhsVector[i + 1] = firstTermVariableSum * _rhsVector[0];
+                //interaction term
+                int bi = 1, ci = 1, di = 1, ei = 1;
 
-                // cumulative product for interaction of all variables
-                allVariablesInteraction *= firstTermVariableSum;
-
-                // set second term
-                double secondTermVariableSum = Math.Pow(firstTermVariableSum, 2);
-
-                _equationsMatrix[0][i + 1 + variablesCount] = secondTermVariableSum;
-                _equationsMatrix[i + 1 + variablesCount][0] = secondTermVariableSum;
-                _rhsVector[i + 1 + variablesCount] = secondTermVariableSum * _rhsVector[0];
-            }
-
-            // calculate interaction terms
-            if (variablesCount > 1)
-            {
-                for (int i = 1; i < variablesCount; i++)
+                for (int a = 1; a < variablesCount; a++)
                 {
-                    for (int j = i + 1; j < variablesCount + 1; j++)
+                    for (int b = a + 1; b < variablesCount + 1; b++)
                     {
-                        double twoVariablesInteraction = _equationsMatrix[0][i] * _equationsMatrix[0][j];
-                        _equationsMatrix[0][i + 2 * variablesCount] = twoVariablesInteraction;
-                        _equationsMatrix[i + 2 * variablesCount][0] = twoVariablesInteraction;
-                        _rhsVector[i + 2 * variablesCount] = twoVariablesInteraction * _rhsVector[0];
+                        double twoVariablesInteraction = tempMatrix[0][a] * tempMatrix[0][b];
+                        tempMatrix[0][bi + 2 * variablesCount] = twoVariablesInteraction;
+                        tempMatrix[bi + 2 * variablesCount][0] = twoVariablesInteraction;
+                        _rhsVector[bi + 2 * variablesCount] += twoVariablesInteraction * _dataResponse[n];
 
+                        bi++;
                         int twoVariablesInteractionCount = Combinatorics.Combinations(variablesCount, 2);
 
-                        for (int k = j + 1; k < variablesCount + 1; k++)
+                        for (int c = b + 1; c < variablesCount + 1; c++)
                         {
-                            double threeVariablesInteraction = _equationsMatrix[0][i] * _equationsMatrix[0][j] * _equationsMatrix[0][k];
-                            _equationsMatrix[0][i + 2 * variablesCount + twoVariablesInteractionCount] = threeVariablesInteraction;
-                            _equationsMatrix[i + 2 * variablesCount + twoVariablesInteractionCount][0] = threeVariablesInteraction;
-                            _rhsVector[i + 2 * variablesCount + twoVariablesInteractionCount] = threeVariablesInteraction * _rhsVector[0];
+                            double threeVariablesInteraction = tempMatrix[0][a] * tempMatrix[0][b] * tempMatrix[0][c];
+                            tempMatrix[0][ci + 2 * variablesCount + twoVariablesInteractionCount] = threeVariablesInteraction;
+                            tempMatrix[ci + 2 * variablesCount + twoVariablesInteractionCount][0] = threeVariablesInteraction;
+                            _rhsVector[ci + 2 * variablesCount + twoVariablesInteractionCount] += threeVariablesInteraction * _dataResponse[n];
 
+                            ci++;
                             int threeVariablesInteractionCount = Combinatorics.Combinations(variablesCount, 3);
 
-                            for (int l = k + 1; l < variablesCount + 1; l++)
+                            for (int d = c + 1; d < variablesCount + 1; d++)
                             {
-                                double fourVariablesInteraction = _equationsMatrix[0][i] * _equationsMatrix[0][j] * _equationsMatrix[0][k] * _equationsMatrix[0][l];
-                                _equationsMatrix[0][i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount] = fourVariablesInteraction;
-                                _equationsMatrix[i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount][0] = fourVariablesInteraction;
-                                _rhsVector[i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount] = fourVariablesInteraction * _rhsVector[0];
+                                double fourVariablesInteraction = tempMatrix[0][a] * tempMatrix[0][b] * tempMatrix[0][c] * tempMatrix[0][d];
+                                tempMatrix[0][di + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount] = fourVariablesInteraction;
+                                tempMatrix[di + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount][0] = fourVariablesInteraction;
+                                _rhsVector[di + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount] += fourVariablesInteraction * _dataResponse[n];
 
+                                di++;
                                 int fourVariablesInteractionCount = Combinatorics.Combinations(variablesCount, 4);
 
-                                for (int m = l + 1; m < variablesCount + 1; m++)
+                                for (int e = d + 1; e < variablesCount + 1; e++)
                                 {
-                                    double fiveVariablesInteraction = _equationsMatrix[0][i] * _equationsMatrix[0][j] * _equationsMatrix[0][k] * _equationsMatrix[0][l] * _equationsMatrix[0][m];
-                                    _equationsMatrix[0][i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount] = fiveVariablesInteraction;
-                                    _equationsMatrix[i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount][0] = fiveVariablesInteraction;
-                                    _rhsVector[i + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount] = fiveVariablesInteraction * _rhsVector[0];
+                                    double fiveVariablesInteraction = tempMatrix[0][a] * tempMatrix[0][b] * tempMatrix[0][c] * tempMatrix[0][d] * tempMatrix[0][e];
+                                    tempMatrix[0][ei + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount] = fiveVariablesInteraction;
+                                    tempMatrix[ei + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount][0] = fiveVariablesInteraction;
+                                    _rhsVector[ei + 2 * variablesCount + twoVariablesInteractionCount + threeVariablesInteractionCount + fourVariablesInteractionCount] += fiveVariablesInteraction * _dataResponse[n];
+
+                                    ei++;
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            for (int i = 1; i < TermsCount[variablesCount]; i++)
-            {
-                for (int j = 1; j < TermsCount[variablesCount]; j++)
+                // calculate the rest of the matrix
+                for (int k = 1; k < TermsCount[variablesCount]; k++)
                 {
-                    _equationsMatrix[i][j] = _equationsMatrix[0][i] * _equationsMatrix[j][0];
+                    for (int l = 1; l < TermsCount[variablesCount]; l++)
+                    {
+                        tempMatrix[k][l] = tempMatrix[0][k] * tempMatrix[l][0];
+                    }
+                }
+
+                // add row data to sum
+                for (int k = 0; k < TermsCount[variablesCount]; k++)
+                {
+                    for (int l = 0; l < TermsCount[variablesCount]; l++)
+                    {
+                        if (k == 0 && l == 0) continue;
+
+                        _equationsMatrix[k][l] += tempMatrix[k][l];
+                    }
                 }
             }
         }
-
-
 
         private static double AllVariableInteractionSums(Vector coeficients, double[] queryVariables)
         {
@@ -523,7 +530,7 @@ namespace CharlieOfficeSpacePrices
                 {
                     for (int j = i + 1; j < variablesCount + 1; j++)
                     {
-                        resultSum += coeficients[i + 2*variablesCount]*queryVariables[i - 1]*queryVariables[j - 1];
+                        resultSum += coeficients[i + 2 * variablesCount] * queryVariables[i - 1] * queryVariables[j - 1];
 
                         int twoVariablesInteractionCount = Combinatorics.Combinations(variablesCount, 2);
 
